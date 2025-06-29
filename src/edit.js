@@ -22,6 +22,20 @@ export default function Edit({ attributes, setAttributes }) {
                             </Button>
                         )}
                     />
+                    {desktopImage && (
+                        <div style={{ marginBottom: '20px' }}>
+                            <img 
+                                src={desktopImage} 
+                                alt="Vista previa escritorio" 
+                                style={{ 
+                                    width: '100%', 
+                                    height: 'auto', 
+                                    border: '1px solid #ddd',
+                                    borderRadius: '4px'
+                                }} 
+                            />
+                        </div>
+                    )}
 
                     <MediaUpload
                         onSelect={(media) => setAttributes({ mobileImage: media.url })}
@@ -32,6 +46,20 @@ export default function Edit({ attributes, setAttributes }) {
                             </Button>
                         )}
                     />
+                    {mobileImage && (
+                        <div style={{ marginBottom: '20px' }}>
+                            <img 
+                                src={mobileImage} 
+                                alt="Vista previa móvil" 
+                                style={{ 
+                                    width: '100%', 
+                                    height: 'auto', 
+                                    border: '1px solid #ddd',
+                                    borderRadius: '4px'
+                                }} 
+                            />
+                        </div>
+                    )}
                 </PanelBody>
 
                 <PanelBody title="Configuración de imagen" initialOpen={true}>
