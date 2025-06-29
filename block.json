@@ -29,6 +29,10 @@
     "disableLazyLoading": {
       "type": "boolean",
       "default": true
+    },
+    "openInNewWindow": {
+      "type": "boolean",
+      "default": false
     }
   },
   "editorScript": "file:./build/block.js",

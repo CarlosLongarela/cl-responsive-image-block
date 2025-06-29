@@ -27,7 +27,7 @@ Este plugin añade un bloque personalizado al editor de WordPress (Gutenberg) qu
 - Imagen a ancho completo de pantalla (100vw)
 - Cambio automático entre imagen de escritorio y móvil
 - Sin distorsión de imagen (`object-fit: cover`)
-- Enlaces con `target="_blank"` y `rel="noopener noreferrer"`
+- Enlaces con configuración flexible de ventana nueva
 - Lazy loading configurable
 
 ## 🛠️ Instalación
@@ -48,14 +48,15 @@ Este plugin añade un bloque personalizado al editor de WordPress (Gutenberg) qu
 En el panel lateral derecho encontrarás:
 
 #### 📁 **Panel "Imágenes"**
+- **Deshabilitar lazy loading**: Control global para carga inmediata de ambas imágenes (por defecto: deshabilitado)
 - **Seleccionar imagen de escritorio**: Imagen principal (obligatoria)
 - **Seleccionar imagen móvil**: Se mostrará en pantallas ≤ 768px (opcional)
 - Vista previa de ambas imágenes bajo cada botón
 
 #### ⚙️ **Panel "Configuración de imagen"**
 - **Enlace de la imagen**: URL de destino (opcional, con validación)
+- **Abrir enlace en ventana nueva**: Controla si el enlace se abre en ventana nueva (por defecto: deshabilitado)
 - **Texto alternativo**: Para accesibilidad (recomendado)
-- **Deshabilitar lazy loading**: Marcar para carga inmediata (por defecto: deshabilitado)
 
 ### Paso 3: Publicar
 El bloque generará automáticamente el HTML responsive optimizado.
@@ -101,10 +102,22 @@ El bloque utiliza las siguientes clases CSS que puedes personalizar:
 
 ## 🔧 HTML Generado
 
-### Con enlace:
+### Con enlace (ventana nueva):
 ```html
 <div class="wp-block-tabernawp-responsive-image cl-responsive-image">
     <a href="https://ejemplo.com" target="_blank" rel="noopener noreferrer" class="cl-responsive-image-link">
+        <picture class="cl-responsive-image-picture">
+            <source srcset="imagen-mobile.jpg" media="(max-width: 768px)">
+            <img src="imagen-desktop.jpg" alt="Descripción" class="cl-responsive-image-img" loading="eager">
+        </picture>
+    </a>
+</div>
+```
+
+### Con enlace (misma ventana):
+```html
+<div class="wp-block-tabernawp-responsive-image cl-responsive-image">
+    <a href="https://ejemplo.com" target="_self" class="cl-responsive-image-link">
         <picture class="cl-responsive-image-picture">
             <source srcset="imagen-mobile.jpg" media="(max-width: 768px)">
             <img src="imagen-desktop.jpg" alt="Descripción" class="cl-responsive-image-img" loading="eager">

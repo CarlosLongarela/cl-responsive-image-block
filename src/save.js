@@ -1,7 +1,7 @@
 import { useBlockProps } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
-    const { desktopImage, mobileImage, imageLink, altText, disableLazyLoading } = attributes;
+    const { desktopImage, mobileImage, imageLink, altText, disableLazyLoading, openInNewWindow } = attributes;
 
     if (!desktopImage) return null;
 
@@ -26,8 +26,8 @@ export default function save({ attributes }) {
             {imageLink ? (
                 <a
                     href={imageLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={openInNewWindow ? "_blank" : "_self"}
+                    rel={openInNewWindow ? "noopener noreferrer" : undefined}
                     className="cl-responsive-image-link"
                 >
                     {picture}

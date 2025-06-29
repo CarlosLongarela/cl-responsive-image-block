@@ -3,7 +3,7 @@ import { Button, TextControl, PanelBody, CheckboxControl, Notice } from '@wordpr
 import { Fragment, useState } from '@wordpress/element';
 
 export default function Edit({ attributes, setAttributes }) {
-    const { desktopImage, mobileImage, imageLink, altText, disableLazyLoading } = attributes;
+    const { desktopImage, mobileImage, imageLink, altText, disableLazyLoading, openInNewWindow } = attributes;
     const [urlError, setUrlError] = useState('');
 
     // Función para validar URL
@@ -38,6 +38,13 @@ export default function Edit({ attributes, setAttributes }) {
         <Fragment>
             <InspectorControls>
                 <PanelBody title="Imágenes" initialOpen={true}>
+                    <CheckboxControl
+                        label="Deshabilitar lazy loading"
+                        checked={disableLazyLoading}
+                        onChange={(value) => setAttributes({ disableLazyLoading: value })}
+                        help="Desactivar la carga diferida para cargar las imágenes inmediatamente"
+                    />
+
                     <MediaUpload
                         onSelect={(media) => setAttributes({ desktopImage: media.url })}
                         allowedTypes={['image']}
@@ -101,16 +108,17 @@ export default function Edit({ attributes, setAttributes }) {
                         </Notice>
                     )}
 
+                    <CheckboxControl
+                        label="Abrir enlace en ventana nueva"
+                        checked={openInNewWindow}
+                        onChange={(value) => setAttributes({ openInNewWindow: value })}
+                        help="Solo se aplica si has configurado un enlace"
+                    />
+
                     <TextControl
                         label="Texto alternativo"
                         value={altText}
                         onChange={(value) => setAttributes({ altText: value })}
-                    />
-
-                    <CheckboxControl
-                        label="Deshabilitar lazy loading"
-                        checked={disableLazyLoading}
-                        onChange={(value) => setAttributes({ disableLazyLoading: value })}
                     />
                 </PanelBody>
             </InspectorControls>
