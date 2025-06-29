@@ -1,0 +1,31 @@
+{
+  "apiVersion": 2,
+  "name": "tabernawp/responsive-image",
+  "title": "Responsive Image",
+  "category": "media",
+  "icon": "format-image",
+  "description": "Imagen responsive con versión para escritorio y móvil, a ancho completo.",
+  "supports": {
+    "align": ["full"],
+    "html": false
+  },
+  "attributes": {
+    "desktopImage": {
+      "type": "string",
+      "default": ""
+    },
+    "mobileImage": {
+      "type": "string",
+      "default": ""
+    },
+    "imageLink": {
+      "type": "string",
+      "default": ""
+    },
+    "altText": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./build/block.js"
+}
