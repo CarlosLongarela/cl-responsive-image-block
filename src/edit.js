@@ -1,9 +1,34 @@
 import { MediaUpload, InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { Button, TextControl, PanelBody, CheckboxControl } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
+import { Button, TextControl, PanelBody, CheckboxControl, Notice } from '@wordpress/components';
+import { Fragment, useState } from '@wordpress/element';
 
 export default function Edit({ attributes, setAttributes }) {
     const { desktopImage, mobileImage, imageLink, altText, disableLazyLoading } = attributes;
+    const [urlError, setUrlError] = useState('');
+
+    // Función para validar URL
+    const isValidUrl = (string) => {
+        try {
+            const url = new URL(string);
+            return url.protocol === 'http:' || url.protocol === 'https:';
+        } catch (error) {
+            // La URL no es válida
+            return false;
+        }
+    };
+
+    // Función para manejar el cambio de URL
+    const handleUrlChange = (value) => {
+        setAttributes({ imageLink: value });
+
+        if (value.trim() === '') {
+            setUrlError('');
+        } else if (!isValidUrl(value)) {
+            setUrlError('Por favor, introduce una URL válida (debe comenzar con http:// o https://)');
+        } else {
+            setUrlError('');
+        }
+    };
 
     const blockProps = useBlockProps({
         className: 'cl-responsive-image'
@@ -24,15 +49,15 @@ export default function Edit({ attributes, setAttributes }) {
                     />
                     {desktopImage && (
                         <div style={{ marginBottom: '20px' }}>
-                            <img 
-                                src={desktopImage} 
-                                alt="Vista previa escritorio" 
-                                style={{ 
-                                    width: '100%', 
-                                    height: 'auto', 
+                            <img
+                                src={desktopImage}
+                                alt="Vista previa escritorio"
+                                style={{
+                                    width: '100%',
+                                    height: 'auto',
                                     border: '1px solid #ddd',
                                     borderRadius: '4px'
-                                }} 
+                                }}
                             />
                         </div>
                     )}
@@ -48,15 +73,15 @@ export default function Edit({ attributes, setAttributes }) {
                     />
                     {mobileImage && (
                         <div style={{ marginBottom: '20px' }}>
-                            <img 
-                                src={mobileImage} 
-                                alt="Vista previa móvil" 
-                                style={{ 
-                                    width: '100%', 
-                                    height: 'auto', 
+                            <img
+                                src={mobileImage}
+                                alt="Vista previa móvil"
+                                style={{
+                                    width: '100%',
+                                    height: 'auto',
                                     border: '1px solid #ddd',
                                     borderRadius: '4px'
-                                }} 
+                                }}
                             />
                         </div>
                     )}
@@ -66,8 +91,15 @@ export default function Edit({ attributes, setAttributes }) {
                     <TextControl
                         label="Enlace de la imagen"
                         value={imageLink}
-                        onChange={(value) => setAttributes({ imageLink: value })}
+                        onChange={handleUrlChange}
+                        help={urlError || 'Introduce una URL completa (ej: https://ejemplo.com)'}
+                        className={urlError ? 'has-error' : ''}
                     />
+                    {urlError && (
+                        <Notice status="error" isDismissible={false}>
+                            {urlError}
+                        </Notice>
+                    )}
 
                     <TextControl
                         label="Texto alternativo"
@@ -88,9 +120,9 @@ export default function Edit({ attributes, setAttributes }) {
                     {desktopImage ? (
                         <picture className="cl-responsive-image-picture">
                             {mobileImage && <source srcSet={mobileImage} media="(max-width: 768px)" />}
-                            <img 
-                                src={desktopImage} 
-                                alt={altText || 'Vista previa'} 
+                            <img
+                                src={desktopImage}
+                                alt={altText || 'Vista previa'}
                                 className="cl-responsive-image-img"
                             />
                         </picture>

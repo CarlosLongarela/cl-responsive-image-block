@@ -29,6 +29,12 @@
 	margin: 0;
 }
 
+/* Estilos para campos con error */
+.components-text-control__input.has-error {
+	border-color: #d63638;
+	box-shadow: 0 0 0 1px #d63638;
+}
+
 /* Media query para mostrar la imagen móvil en el editor cuando la pantalla es pequeña */
 @media (max-width: 768px) {
 	/* El elemento picture automáticamente muestra la imagen correcta según el media query */
