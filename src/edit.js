@@ -12,6 +12,28 @@ export default function Edit({ attributes, setAttributes }) {
     return (
         <Fragment>
             <InspectorControls>
+                <PanelBody title="Imágenes" initialOpen={true}>
+                    <MediaUpload
+                        onSelect={(media) => setAttributes({ desktopImage: media.url })}
+                        allowedTypes={['image']}
+                        render={({ open }) => (
+                            <Button onClick={open} variant="primary" style={{ marginBottom: '10px', width: '100%' }}>
+                                {desktopImage ? 'Cambiar imagen de escritorio' : 'Seleccionar imagen de escritorio'}
+                            </Button>
+                        )}
+                    />
+
+                    <MediaUpload
+                        onSelect={(media) => setAttributes({ mobileImage: media.url })}
+                        allowedTypes={['image']}
+                        render={({ open }) => (
+                            <Button onClick={open} variant="secondary" style={{ marginBottom: '10px', width: '100%' }}>
+                                {mobileImage ? 'Cambiar imagen móvil' : 'Seleccionar imagen móvil'}
+                            </Button>
+                        )}
+                    />
+                </PanelBody>
+
                 <PanelBody title="Configuración de imagen" initialOpen={true}>
                     <TextControl
                         label="Enlace de la imagen"
@@ -35,27 +57,20 @@ export default function Edit({ attributes, setAttributes }) {
 
             <div {...blockProps}>
                 <div className="cl-responsive-image-editor">
-                <MediaUpload
-                    onSelect={(media) => setAttributes({ desktopImage: media.url })}
-                    allowedTypes={['image']}
-                    render={({ open }) => (
-                        <Button onClick={open} variant="primary" style={{ marginBottom: '10px' }}>
-                            {desktopImage ? 'Cambiar imagen de escritorio' : 'Seleccionar imagen de escritorio'}
-                        </Button>
+                    {desktopImage ? (
+                        <picture className="cl-responsive-image-picture">
+                            {mobileImage && <source srcSet={mobileImage} media="(max-width: 768px)" />}
+                            <img 
+                                src={desktopImage} 
+                                alt={altText || 'Vista previa'} 
+                                className="cl-responsive-image-img"
+                            />
+                        </picture>
+                    ) : (
+                        <div className="cl-responsive-image-placeholder">
+                            <p>Selecciona una imagen de escritorio para comenzar</p>
+                        </div>
                     )}
-                />
-                {desktopImage && <img src={desktopImage} alt="Vista previa escritorio" style={{ width: '100%', maxWidth: '400px', marginBottom: '20px' }} />}
-
-                <MediaUpload
-                    onSelect={(media) => setAttributes({ mobileImage: media.url })}
-                    allowedTypes={['image']}
-                    render={({ open }) => (
-                        <Button onClick={open} variant="secondary" style={{ marginBottom: '10px' }}>
-                            {mobileImage ? 'Cambiar imagen móvil' : 'Seleccionar imagen móvil'}
-                        </Button>
-                    )}
-                />
-                {mobileImage && <img src={mobileImage} alt="Vista previa móvil" style={{ width: '100%', maxWidth: '200px', marginBottom: '20px' }} />}
                 </div>
             </div>
         </Fragment>

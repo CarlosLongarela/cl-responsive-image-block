@@ -18,10 +18,3 @@
 	display: block;
 	width: 100%;
 }
-
-/* Estilos para el editor */
-.cl-responsive-image-editor img {
-	max-width: 100%;
-	height: auto;
-	margin-bottom: 10px;
-}

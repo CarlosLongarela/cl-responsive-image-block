@@ -32,5 +32,6 @@
     }
   },
   "editorScript": "file:./build/block.js",
+  "editorStyle": "file:./build/block.css",
   "style": "file:./build/style-block.css"
 }

@@ -1,0 +1,38 @@
+/* Estilos específicos para el editor del bloque */
+.cl-responsive-image-editor {
+	border: 2px solid #00a32a;
+	border-radius: 4px;
+	padding: 10px;
+	min-height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.cl-responsive-image-editor .cl-responsive-image-picture {
+	width: 100%;
+}
+
+.cl-responsive-image-editor .cl-responsive-image-img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.cl-responsive-image-placeholder {
+	text-align: center;
+	color: #666;
+	font-style: italic;
+}
+
+.cl-responsive-image-placeholder p {
+	margin: 0;
+}
+
+/* Media query para mostrar la imagen móvil en el editor cuando la pantalla es pequeña */
+@media (max-width: 768px) {
+	/* El elemento picture automáticamente muestra la imagen correcta según el media query */
+	.cl-responsive-image-editor {
+		border-color: #0073aa; /* Color azul para indicar que se está mostrando la versión móvil */
+	}
+}
