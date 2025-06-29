@@ -2,7 +2,7 @@
 /**
  * Plugin Name: CL Responsive Image Block
  * Description: Bloque de imagen responsive con enlace y versión para móvil y escritorio.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Carlos Longarela
  * Author URI: https://tabernawp.com/
  * License: GPL-2.0+

@@ -11,12 +11,16 @@
 
 .cl-responsive-image-editor .cl-responsive-image-picture {
 	width: 100%;
+	display: flex;
+	justify-content: center;
 }
 
 .cl-responsive-image-editor .cl-responsive-image-img {
 	width: 100%;
 	height: auto;
 	display: block;
+	max-width: 100%;
+	object-fit: contain;
 }
 
 .cl-responsive-image-placeholder {

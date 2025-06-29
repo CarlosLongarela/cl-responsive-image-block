@@ -1,6 +1,11 @@
-/* Estilos para el bloque Responsive Image */
+/* Estilos para el bloque Responsive Image - Solo Frontend */
 .cl-responsive-image {
-	width: 100%;
+	width: 100vw;
+	position: relative;
+	left: 50%;
+	right: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
 }
 
 .cl-responsive-image-picture {
@@ -12,9 +17,34 @@
 	width: 100%;
 	display: block;
 	height: auto;
+	object-fit: cover;
+	object-position: center;
 }
 
 .cl-responsive-image-link {
 	display: block;
 	width: 100%;
+}
+
+/* Anular estilos de ancho completo en el editor */
+.block-editor-block-list__layout .cl-responsive-image {
+	width: 100%;
+	position: static;
+	left: auto;
+	right: auto;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+/* Estilos específicos para el contenedor del editor */
+.block-editor-block-list__layout .cl-responsive-image .cl-responsive-image-picture {
+	width: 100%;
+	display: block;
+}
+
+.block-editor-block-list__layout .cl-responsive-image .cl-responsive-image-img {
+	width: 100%;
+	height: auto;
+	display: block;
+	object-fit: contain;
 }
