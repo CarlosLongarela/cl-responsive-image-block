@@ -1,9 +1,13 @@
-import { MediaUpload, InspectorControls } from '@wordpress/block-editor';
-import { Button, TextControl, PanelBody } from '@wordpress/components';
+import { MediaUpload, InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { Button, TextControl, PanelBody, CheckboxControl } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 
 export default function Edit({ attributes, setAttributes }) {
-    const { desktopImage, mobileImage, imageLink, altText } = attributes;
+    const { desktopImage, mobileImage, imageLink, altText, disableLazyLoading } = attributes;
+
+    const blockProps = useBlockProps({
+        className: 'cl-responsive-image'
+    });
 
     return (
         <Fragment>
@@ -20,10 +24,17 @@ export default function Edit({ attributes, setAttributes }) {
                         value={altText}
                         onChange={(value) => setAttributes({ altText: value })}
                     />
+
+                    <CheckboxControl
+                        label="Deshabilitar lazy loading"
+                        checked={disableLazyLoading}
+                        onChange={(value) => setAttributes({ disableLazyLoading: value })}
+                    />
                 </PanelBody>
             </InspectorControls>
 
-            <div className="responsive-image-editor">
+            <div {...blockProps}>
+                <div className="cl-responsive-image-editor">
                 <MediaUpload
                     onSelect={(media) => setAttributes({ desktopImage: media.url })}
                     allowedTypes={['image']}
@@ -45,6 +56,7 @@ export default function Edit({ attributes, setAttributes }) {
                     )}
                 />
                 {mobileImage && <img src={mobileImage} alt="Vista previa móvil" style={{ width: '100%', maxWidth: '200px', marginBottom: '20px' }} />}
+                </div>
             </div>
         </Fragment>
     );

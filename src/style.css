@@ -1,0 +1,27 @@
+/* Estilos para el bloque Responsive Image */
+.cl-responsive-image {
+	width: 100%;
+}
+
+.cl-responsive-image-picture {
+	width: 100%;
+	display: block;
+}
+
+.cl-responsive-image-img {
+	width: 100%;
+	display: block;
+	height: auto;
+}
+
+.cl-responsive-image-link {
+	display: block;
+	width: 100%;
+}
+
+/* Estilos para el editor */
+.cl-responsive-image-editor img {
+	max-width: 100%;
+	height: auto;
+	margin-bottom: 10px;
+}

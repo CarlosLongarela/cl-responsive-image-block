@@ -25,7 +25,12 @@
     "altText": {
       "type": "string",
       "default": ""
+    },
+    "disableLazyLoading": {
+      "type": "boolean",
+      "default": true
     }
   },
-  "editorScript": "file:./block.js"
+  "editorScript": "file:./block.js",
+  "style": "file:./style.css"
 }
